@@ -1,6 +1,6 @@
 package service;
 
-import dao.UserDAO;
+import dao.UserJdbcDAO;
 import entity.User;
 
 import java.sql.Connection;
@@ -45,7 +45,7 @@ public class UserService {
 
 
     public boolean addUser(User user) {
-        UserDAO service = getUserDAO();
+        UserJdbcDAO service = getUserDAO();
         try {
             List<User> list = service.getAllUsers();
             for (User item : list) {
@@ -86,9 +86,9 @@ public class UserService {
         }
     }
 
-    private static UserDAO getUserDAO() {
+    private static UserJdbcDAO getUserDAO() {
         try {
-            return new UserDAO(getMysqlConnection());
+            return new UserJdbcDAO(getMysqlConnection());
         } catch (SQLException e) {
             e.printStackTrace();
         }
