@@ -10,8 +10,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
+    private static UserService instance;
 
-    public UserService() {
+    private UserService() {
+    }
+
+    public static UserService getInstance() {
+        if (instance == null) {
+            instance = new UserService();
+        }
+        return instance;
     }
 
     public boolean updateUserInfo(User user) {
