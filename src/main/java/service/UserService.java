@@ -1,6 +1,6 @@
 package service;
 
-import dao.UserDAO;
+import dao.UserJdbcDAO;
 import entity.User;
 
 import java.sql.Connection;
@@ -24,7 +24,7 @@ public class UserService {
 
     public boolean updateUserInfo(User user) {
         try {
-            getUserDAO().updateUser(user);
+            getUserDAO().update(user);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -34,7 +34,7 @@ public class UserService {
 
     public boolean deleteUser(Integer id) {
         try {
-            getUserDAO().deleteUser(id);
+            getUserDAO().deleteById(id);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -44,7 +44,7 @@ public class UserService {
 
     public List<User> getAllUsers() {
         try {
-            return getUserDAO().getAllUsers();
+            return getUserDAO().getAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,15 +53,15 @@ public class UserService {
 
 
     public boolean addUser(User user) {
-        UserDAO service = getUserDAO();
+        UserJdbcDAO service = getUserDAO();
         try {
-            List<User> list = service.getAllUsers();
+            List<User> list = service.getAll();
             for (User item : list) {
                 if (item.getName().equals(user.getName())) {
                     return false;
                 }
             }
-            getUserDAO().addUser(user);
+            getUserDAO().add(user);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,9 +94,9 @@ public class UserService {
         }
     }
 
-    private static UserDAO getUserDAO() {
+    private static UserJdbcDAO getUserDAO() {
         try {
-            return new UserDAO(getMysqlConnection());
+            return new UserJdbcDAO(getMysqlConnection());
         } catch (SQLException e) {
             e.printStackTrace();
         }
