@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet {
     UserService service = new UserService();
 
@@ -24,6 +24,6 @@ public class IndexServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         service.addUser(new User(name, password, email));
-        response.sendRedirect("/");
+        response.sendRedirect("/index");
     }
 }

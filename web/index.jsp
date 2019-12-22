@@ -17,7 +17,7 @@
 <% List<User> users = service.getAllUsers(); %>
 <div style="width: 600px; text-align: center">
     <h3>New User</h3>
-    <form action="IndexServlet" method="post">
+    <form action="/index" method="post">
         <p>
             <label for="name" style="display: inline-block; width: 65px; text-align: right;">Name</label>
             <input type="text" id="name" name="name">
