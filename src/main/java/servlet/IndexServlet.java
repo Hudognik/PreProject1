@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
-    UserService service = new UserService();
+    UserService service = UserService.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("index.jsp").forward(request, response);
