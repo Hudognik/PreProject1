@@ -13,7 +13,7 @@
     <title>Index</title>
 </head>
 <body>
-<% UserService service = new UserService();%>
+<% UserService service = UserService.getInstance();%>
 <% List<User> users = service.getAllUsers(); %>
 <div style="width: 600px; text-align: center">
     <h3>New User</h3>

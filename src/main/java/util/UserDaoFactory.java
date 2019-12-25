@@ -1,9 +1,8 @@
 package util;
 
-import dao.DAO;
+import dao.UserDAO;
 import dao.UserHibernateDAO;
 import dao.UserJdbcDAO;
-import entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -28,7 +27,7 @@ public class UserDaoFactory {
         return instance;
     }
 
-    public DAO<User, Integer> getDAO() {
+    public UserDAO getDAO() {
         try {
             File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("config.property")).getFile());
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -44,7 +43,7 @@ public class UserDaoFactory {
         return null;
     }
 
-    private static SessionFactory getSessionFactory() {
+    private SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             sessionFactory = createSessionFactory();
         }
