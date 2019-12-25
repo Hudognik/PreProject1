@@ -1,7 +1,9 @@
 package service;
 
+import dao.UserHibernateDAO;
 import dao.UserJdbcDAO;
 import entity.User;
+import util.HibernateUtil;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -15,50 +17,31 @@ public class UserService {
     }
 
     public boolean updateUserInfo(User user) {
-        try {
-            getUserDAO().updateUser(user);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        getUserDAO().update(user);
         return true;
     }
 
     public boolean deleteUser(Integer id) {
-        try {
-            getUserDAO().deleteUser(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        getUserDAO().deleteById(id);
         return true;
     }
 
     public List<User> getAllUsers() {
-        try {
-            return getUserDAO().getAllUsers();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return getUserDAO().getAll();
+
     }
 
 
     public boolean addUser(User user) {
-        UserJdbcDAO service = getUserDAO();
-        try {
-            List<User> list = service.getAllUsers();
-            for (User item : list) {
-                if (item.getName().equals(user.getName())) {
-                    return false;
-                }
+        UserHibernateDAO service = getUserDAO();
+        List<User> list = service.getAll();
+        for (User item : list) {
+            if (item.getName().equals(user.getName())) {
+                return false;
             }
-            getUserDAO().addUser(user);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
         }
+        getUserDAO().add(user);
+        return true;
     }
 
     private static Connection getMysqlConnection() {
@@ -86,12 +69,7 @@ public class UserService {
         }
     }
 
-    private static UserJdbcDAO getUserDAO() {
-        try {
-            return new UserJdbcDAO(getMysqlConnection());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    private static UserHibernateDAO getUserDAO() {
+        return new UserHibernateDAO(HibernateUtil.getSessionFactory().openSession());
     }
 }
