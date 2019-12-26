@@ -20,10 +20,16 @@ public class IndexServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF8");
-        String name = request.getParameter("name");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        service.addUser(new User(name, password, email));
-        response.sendRedirect("/index");
+        User user;
+        if ((user = service.authUser(email, password)) != null) {
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("/admin");
+        } else {
+            response.sendRedirect("/index");
+        }
+        // service.addUser(new User(password, email));
+        //  response.sendRedirect("/index");
     }
 }

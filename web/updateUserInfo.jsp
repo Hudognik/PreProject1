@@ -11,11 +11,16 @@
     <title>Update</title>
 </head>
 <body>
-<form action="/update" method="post">
+<form action="/admin/update" method="post">
     <input type="hidden" name="id" value=<%=request.getParameter("id")%>>
+    <label>name</label>
     <input type="text" name="name" value=<%=request.getParameter("name")%>>
+    <label>email</label>
     <input type="email" name="email" value=<%=request.getParameter("email")%>>
+    <label>password</label>
     <input type="password" name="password" value=<%=request.getParameter("password")%>>
+    <label>role</label>
+    <input type="text" name="role" value=<%=request.getParameter("role")%>>
     <button type="submit">Add</button>
 </form>
 </body>

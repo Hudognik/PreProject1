@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/update")
+@WebServlet("/admin/update")
 public class UpdateServlet extends HttpServlet {
     UserService service = UserService.getInstance();
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("updateUserInfo.jsp").forward(request, response);
+        request.getRequestDispatcher("/updateUserInfo.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,8 @@ public class UpdateServlet extends HttpServlet {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        service.updateUserInfo(new User(id, name, password, email));
-        response.sendRedirect("/");
+        String role = request.getParameter("role");
+        service.updateUserInfo(new User(id, name, password, email, role));
+        response.sendRedirect("/admin");
     }
 }

@@ -64,4 +64,13 @@ public class UserService {
             return false;
         }
     }
+
+    public User authUser(String email, String password) {
+        for (User user : getAllUsers()) {
+            if (user.getEmail().equals(email)&&user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }
