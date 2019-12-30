@@ -21,7 +21,7 @@
     <input type="password" name="password" value=<%=request.getParameter("password")%>>
     <label>role</label>
     <input type="text" name="role" value=<%=request.getParameter("role")%>>
-    <button type="submit">Add</button>
+    <button type="submit">update</button>
 </form>
 </body>
 </html>

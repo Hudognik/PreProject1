@@ -16,10 +16,12 @@ public class AdminFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
         HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
         User user = (User) httpServletRequest.getSession().getAttribute("user");
-        if (user!=null&&user.getRole().equals("admin")) {
+        if (user != null && user.getRole().equals("admin")) {
             chain.doFilter(req, resp);
-        } else {
+        } else if(user!=null) {
             httpServletResponse.sendRedirect("/user");
+        }else {
+            httpServletResponse.sendRedirect("/");
         }
     }
 }

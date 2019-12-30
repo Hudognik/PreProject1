@@ -12,7 +12,7 @@
 </head>
 <body>
 <div style="width: 600px; text-align: center">
-    <h3>New User</h3>
+    <h3>Login</h3>
     <form action="/index" method="post">
         <p>
             <label for="email" style="display: inline-block; width: 65px; text-align: right;">Email</label>
@@ -22,7 +22,7 @@
             <label for="password" style="display: inline-block; width: 65px; text-align: right;">Password</label>
             <input type="password" id="password" name="password">
         </p>
-        <button type="submit" style="width: 75px;">Add</button>
+        <button type="submit" style="width: 75px;">login</button>
     </form>
 </div>
 </body>
